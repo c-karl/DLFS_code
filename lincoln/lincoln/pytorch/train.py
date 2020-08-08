@@ -80,7 +80,8 @@ class PyTorchTrainer(object):
                         self.model.eval()
                         output = self.model(X_test)[0]
                         loss = self.loss(output, y_test)
-                        print("The loss after", e+1, "epochs was", loss.item())
+                        #print("The loss after", e+1, "epochs was", loss.item())
+                        print(e+1, " 에폭 학습한 후의 손실은 ", loss.item())
 
             else:
                 for X_batch, y_batch in train_dataloader:
@@ -101,5 +102,6 @@ class PyTorchTrainer(object):
                             output = self.model(X_batch)[0]
                             loss = self.loss(output, y_batch)
                             losses.append(loss.item())
-                        print("The loss after", e, "epochs was",
+                        #print("The loss after", e, "epochs was",
+                        print(e, " 에폭 학습한 후의 손실은 ",
                               round(torch.Tensor(losses).mean().item(), 4))

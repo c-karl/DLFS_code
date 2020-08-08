@@ -4,7 +4,7 @@ from numpy import ndarray
 from lincoln.utils.np_utils import (assert_same_shape,
                        softmax,
                        normalize,
-                       exp_ratios,
+                       #exp_ratios,
                        unnormalize)
 
 

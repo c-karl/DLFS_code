@@ -64,13 +64,16 @@ class Trainer(object):
                     if ii % 10 == 0:
                         test_preds = self.net.forward(X_batch, inference=True)
                         batch_loss = self.net.loss.forward(test_preds, y_batch)
-                        print("batch",
-                              ii,
-                              "loss",
+                        print(ii,
+                              "배치 학습 후 손실값은 ",
                               batch_loss)
 
                     if ii % 100 == 0 and ii > 0:
-                        print("Validation accuracy after", ii, "batches is",
+                        #print("Validation accuracy after", ii, "batches is",
+                        #f'''{np.equal(np.argmax(self.net.forward(X_test, inference=True), axis=1),
+                        #np.argmax(y_test, axis=1)).sum() * 100.0 / X_test.shape[0]:.2f}%''')
+
+                        print(ii, "배치 학습 후 검증 데이터에 대한 정확도: ",
                         f'''{np.equal(np.argmax(self.net.forward(X_test, inference=True), axis=1),
                         np.argmax(y_test, axis=1)).sum() * 100.0 / X_test.shape[0]:.2f}%''')
 
@@ -81,18 +84,22 @@ class Trainer(object):
 
                 if early_stopping:
                     if loss < self.best_loss:
-                        print(f"Validation loss after {e+1} epochs is {loss:.3f}")
+                        print(f"{e+1}에폭에서 검증 데이터에 대한 손실값: {loss:.3f}")
+                        #print(f"Validation loss after {e+1} epochs is {loss:.3f}")
                         self.best_loss = loss
                     else:
                         print()
-                        print(f"Loss increased after epoch {e+1}, final loss was {self.best_loss:.3f},",
-                              f"\nusing the model from epoch {e+1-eval_every}")
+                        #print(f"Loss increased after epoch {e+1}, final loss was {self.best_loss:.3f},",
+                        #      f"\nusing the model from epoch {e+1-eval_every}")
+                        print(f"{e+1}에폭에서 손실값이 증가했다. 마지막으로 측정한 손실값은 {e+1-eval_every}",
+                              f"에폭까지 학습된 모델에서 계산된 {self.best_loss:.3f}이다.")
                         self.net = last_model
                         # ensure self.optim is still updating self.net
                         setattr(self.optim, 'net', self.net)
                         break
                 else:
-                    print(f"Validation loss after {e+1} epochs is {loss:.3f}")
+                    #print(f"Validation loss after {e+1} epochs is {loss:.3f}")
+                    print(f"{e+1}에폭에서 검증 데이터에 대한 손실값: {loss:.3f}")
 
             if self.optim.final_lr:
                 self.optim._decay_lr()
