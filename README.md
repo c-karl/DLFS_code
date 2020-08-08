@@ -1,23 +1,26 @@
-# Deep Learning From Scratch code
+# 처음 시작하는 딥러닝
 
-This repo contains all the code from the book [Deep Learning From Scratch](https://www.amazon.com/Deep-Learning-Scratch-Building-Principles/dp/1492041416), published by O'Reilly in September 2019.
+이 저장소에는 한빛미디어에서 2020년 8월 발간된 '처음 시작하는 딥러닝'의 예제 코드가 실려 있다.
 
-It was mostly for me to keep the code I was writing for the book organized, but my hope is readers can clone this repo and step through the code systematically themselves to better understand the concepts.
+이 저장소의 애초 목적은 집필 과정에서 작성한 예제 코드를 보관하기 위해서였으나, 이 저장소의 예제 코드를 활용해 학습에 도움이 되기를 바란다.
 
-## Structure
+## 예제 코드의 구성
 
-Each chapter has two notebooks: a `Code` notebook and a `Math` notebook. Each `Code` notebook contains the Python code for corresponding chapter and can be run start to finish to generate the results from the chapters. The `Math` notebooks were just for me to store the LaTeX equations used in the book, taking advantage of Jupyter's LaTeX rendering functionality.
+각 장마다 2개의 노트북이 있다. "Code" 노트북은 해당 장의 예제 코드를 담은 노트북이고, "Math" 노트북은 책에 수록된 수식의 LaTeX 코드가 담겨 있다.
 
-### `lincoln`
 
-In the notebooks in the Chapters 4, 5, and 7 folders, I import classes from `lincoln`, rather than putting those classes in the Jupyter Notebook itself. `lincoln` is not currently a `pip` installable library; th way I'd recommend to be able to `import` it and run these notebooks is to add a line like the following your `.bashrc` file:
+### `lincoln` 패키지
+
+4장, 5장, 7장에 해당하는 폴더에 수록된 코드에서는 `lincoln` 패키지의 클래스가 사용된다. 해당 패키지의 클래스를 노트북에 그대로 싣지 않고 임포트해 사용하도록 했다. `lincoln` 패키지는 현재 `pip` 설치를 지원하지 않으나 `.basbrc` 파일에 다음 줄을 추가하면 사용할 수 있다.
 
 ```bash
 export PYTHONPATH=$PYTHONPATH:/Users/seth/development/DLFS_code/lincoln
 ```
 
-This will cause Python to search this path for a module called `lincoln` when you run the `import` command (of course, you'll have to replace the path above with the relevant path on your machine once you clone this repo). Then, simply `source` your `.bashrc` file before running the `jupyter notebook` command and you should be good to go.
+역자 주: `lincoln` 패키지가 사용된 노트북에는 해당 패키지에 접근할 수 있도록 경로 설정을 위한 코드가 추가돼 있습니다. 이 저장소의 코드를 내려받아 압축을 푼 경로를 적고 해당 코드의 주석을 해제해서 사용하기 바랍니다.
 
-### Chapter 5: Numpy Convolution Demos
+위 명령을 추가하면 `import` 명령으로 `lincoln` 패키지를 사용할 수 있다. `.bashrc` 파일을 수정하고 나서 `source .bashrc` 명령을 실행한 다음 주피터 노트북을 실행하기 바란다.
 
-While I don't spend much time delving into the details in the main text of the book, I have implemented the batch, multi-channel convolution operation in pure Numpy (I do describe how to do this and share the code in the book's Appendix). In [this notebook](05_convolutions/Numpy_Convolution_Demos.ipynb), I demonstrate using this operation to train a single layer CNN from scratch in pure Numpy to get over 90% accuracy on MNIST.
+### 5장: 넘파이로 구현한 합성곱 신경망 데모
+
+본문에는 지면 관계상 다 싣지 못했으나 넘파이로 구현한 배치 학습 및 다채널 합성곱 연산 전체 코드를 제공한다(구현 내용과 일부 코드가 부록에 실려 있다) 이 [노트북](05_convolutions/Numpy_Convolution_Demos.ipynb)에서 단일 층으로 구성된 합성곱 신경망을 넘파이만으로 직접 구현해 MNIST 데이터셋에 대해 90% 이상의 정확도를 얻는 것을 확인할 수 있다.
